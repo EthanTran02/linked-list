@@ -1,11 +1,11 @@
-class Node {
+export class Node {
   constructor(value = null) {
     this.value = value;
     this.nextNode = null;
   }
 }
 
-class LinkedList {
+export class LinkedList {
   constructor() {
     this.head = null;
   }
@@ -61,9 +61,10 @@ class LinkedList {
     console.log(`last node: ${current.value}`);
   }
 
-  at(target) {
+  at(index) {
     let current = this.head;
-    let count = 1;
+    let count = 0;
+
     // empty case
     if (current === null) {
       console.log("the list in empty");
@@ -71,31 +72,63 @@ class LinkedList {
     }
 
     // regular case
-    while (current) {
-      if (current.value === target) {
-        console.log(`node positio is: ${count}`);
-        return;
-      }
-      count += 1;
+    while (current && count < index) {
       current = current.nextNode;
+      count += 1;
     }
 
-    // not found case
-    console.log("node not found!");
+    if (current) {
+      console.log(`Value at index ${index}: ${current.value}`);
+      return;
+    } else {
+      console.log(`not found item at index ${index}`);
+      return;
+    }
   }
 
   pop() {
-    // 1 -> 2 -> 3 -> null
     let current = this.head;
 
-    while (current.nextNode !== null) {
-      current = current.nextNode;
+    // 1 item case
+    if (current.nextNode === null) {
+      this.head = null;
+      return;
     }
 
-    console.log(current.value);
+    // multiple items case
+    while (current.nextNode.nextNode) {
+      current = current.nextNode;
+    }
+    current.nextNode = null;
   }
 
-  print() {
+  contains(value) {
+    let current = this.head;
+
+    while (current) {
+      if (current.value === value) {
+        return true;
+      }
+      current = current.nextNode;
+    }
+    return false;
+  }
+
+  find(value) {
+    let current = this.head;
+    let count = 0;
+
+    while (current) {
+      if (current.value === value) {
+        return count;
+      }
+      current = current.nextNode;
+      count++;
+    }
+    return null;
+  }
+
+  toString() {
     let current = this.head;
     const result = [];
 
@@ -113,7 +146,7 @@ const list = new LinkedList();
 list.prepend(1);
 list.append(2);
 list.append(3);
-list.print();
-list.pop();
+// 1 -> 2 -> 3 -> null
 
-// keep working on pop() method
+// printin out
+list.toString();
