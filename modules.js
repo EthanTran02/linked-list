@@ -137,16 +137,6 @@ export class LinkedList {
       current = current.nextNode;
     }
     result;
-    console.log(result.join(" -> ") + " -> null");
+    return `${result.join(" -> ")} -> null`;
   }
 }
-
-// test case
-const list = new LinkedList();
-list.prepend(1);
-list.append(2);
-list.append(3);
-// 1 -> 2 -> 3 -> null
-
-// printin out
-list.toString();
