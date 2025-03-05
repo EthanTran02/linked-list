@@ -136,7 +136,6 @@ export class LinkedList {
       result.push(current.value);
       current = current.nextNode;
     }
-    result;
     return `${result.join(" -> ")} -> null`;
   }
 }
